@@ -40,12 +40,13 @@ export default function ProductSummary({ className }: { className?: string }) {
         {...register('title')}
         error={errors.title?.message as string}
       />
-      <Input
+      <div></div>
+      {/* <Input
         label="재고관리 code"
         placeholder="재고관리 code를 입력해주세요"
         {...register('sku')}
         error={errors.sku?.message as string}
-      />
+      /> */}
 
       <Controller
         name="type"

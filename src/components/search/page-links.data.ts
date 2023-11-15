@@ -262,42 +262,42 @@ export const pageLinks = [
     name: 'Modern Sign Up',
     href: routes.auth.signUp,
   },
-  {
-    name: 'Vintage Sign Up',
-    href: routes.auth.signUp2,
-  },
-  {
-    name: 'Trendy Sign Up',
-    href: routes.auth.signUp3,
-  },
-  {
-    name: 'Elegant Sign Up',
-    href: routes.auth.signUp4,
-  },
-  {
-    name: 'Classic Sign Up',
-    href: routes.auth.signUp5,
-  },
+  // {
+  //   name: 'Vintage Sign Up',
+  //   href: routes.auth.signUp2,
+  // },
+  // {
+  //   name: 'Trendy Sign Up',
+  //   href: routes.auth.signUp3,
+  // },
+  // {
+  //   name: 'Elegant Sign Up',
+  //   href: routes.auth.signUp4,
+  // },
+  // {
+  //   name: 'Classic Sign Up',
+  //   href: routes.auth.signUp5,
+  // },
   {
     name: 'Modern Sign In',
     href: routes.auth.signIn,
   },
-  {
-    name: 'Vintage Sign In',
-    href: routes.auth.signIn2,
-  },
-  {
-    name: 'Trendy Sign In',
-    href: routes.auth.signIn3,
-  },
-  {
-    name: 'Elegant Sign In',
-    href: routes.auth.signIn4,
-  },
-  {
-    name: 'Classic Sign In',
-    href: routes.auth.signIn5,
-  },
+  // {
+  //   name: 'Vintage Sign In',
+  //   href: routes.auth.signIn2,
+  // },
+  // {
+  //   name: 'Trendy Sign In',
+  //   href: routes.auth.signIn3,
+  // },
+  // {
+  //   name: 'Elegant Sign In',
+  //   href: routes.auth.signIn4,
+  // },
+  // {
+  //   name: 'Classic Sign In',
+  //   href: routes.auth.signIn5,
+  // },
   {
     name: 'Modern Forgot Password',
     href: routes.auth.forgotPassword1,

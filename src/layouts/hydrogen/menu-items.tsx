@@ -100,10 +100,6 @@ export const menuItems = [
       },
       // {
       //   name: '삭제예정',
-      //   href: routes.eCommerce.shop,
-      // },
-      // {
-      //   name: '삭제예정',
       //   href: routes.eCommerce.cart,
       // },
       // {

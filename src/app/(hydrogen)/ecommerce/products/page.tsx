@@ -9,8 +9,7 @@ import { PiArrowLineDownBold, PiPlusBold } from 'react-icons/pi';
 import { productsData } from '@/data/products-data';
 import { exportToCSV } from '@/utils/export-to-csv';
 import { productListType } from 'types/product/product';
-import { use, useEffect, useState } from 'react';
-import { responseDataType } from 'types/responseData';
+import { useEffect, useState } from 'react';
 
 const pageHeader = {
   title: '상품목록',
@@ -36,7 +35,7 @@ export default function ProductsPage() {
   useEffect(() => {
     const getData = async () => {
       const response = await fetch('/api/product');
-      const data:responseDataType = await response.json() as any;
+      const data:any = await response.json() as any;
       setAdminProductDatas(data.result);
     }
     getData();

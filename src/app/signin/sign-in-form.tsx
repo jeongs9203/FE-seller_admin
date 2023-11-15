@@ -11,11 +11,10 @@ import { PiArrowRightBold } from 'react-icons/pi';
 import Link from 'next/link';
 import { routes } from '@/config/routes';
 import { Title, Text } from '@/components/ui/text';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { SubmitHandler } from 'react-hook-form';
-import { redirect, useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { set } from 'lodash';
 
 const loginSchema = z.object({
   username: z.string().email({ message: 'Invalid username' }),

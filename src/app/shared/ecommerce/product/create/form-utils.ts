@@ -160,23 +160,67 @@ export const menuItems = [
   },
 ];
 
-// Category option 중분류
+// 종류카테고리
+export const typeOption = [
+  {
+    value: 'physical product',
+    name: '전체',
+  },
+  {
+    value: 'physical product',
+    name: '신상',
+  },
+  {
+    value: 'physical product',
+    name: '아우터',
+  },
+  {
+    value: 'physical product',
+    name: '원피스',
+  },
+  {
+    value: 'physical product',
+    name: '티셔츠',
+  },
+  {
+    value: 'physical product',
+    name: '신발',
+  },
+  {
+    value: 'physical product',
+    name: '커플옷',
+  },
+  {
+    value: 'physical product',
+    name: '기타',
+  },
+];
+
+// 소재 카테고리
 export const categoryOption = [
   {
     value: 'categoryOption',
-    name: '대형',
+    name: '전체',
   },
   {
     value: 'categoryOption',
-    name: '노랑',
+    name: '후드',
   },
   {
     value: 'categoryOption',
-    name: '초록',
+    name: '패딩',
   },
   {
     value: 'categoryOption',
-    name: '파랑',
+    name: '자켓',
+  },
+  {
+    value: 'categoryOption',
+    name: '면',
+  },
+  {
+    value: 'categoryOption',
+    name: '나일론',
   },
 ];
 
@@ -215,30 +259,6 @@ export const colorOption = [
   {
     value: 'cat food',
     name: '파랑',
-  },
-];
-
-// Type option
-export const typeOption = [
-  {
-    value: 'physical product',
-    name: 'XS',
-  },
-  {
-    value: 'physical product',
-    name: 'S',
-  },
-  {
-    value: 'physical product',
-    name: 'M',
-  },
-  {
-    value: 'physical product',
-    name: 'L',
-  },
-  {
-    value: 'physical product',
-    name: 'XL',
   },
 ];
 

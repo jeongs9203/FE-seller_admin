@@ -387,22 +387,22 @@ export const menuItems = [
         name: 'Modern Sign up',
         href: routes.auth.signUp,
       },
-      {
-        name: 'Vintage Sign up',
-        href: routes.auth.signUp2,
-      },
-      {
-        name: 'Trendy Sign up',
-        href: routes.auth.signUp3,
-      },
-      {
-        name: 'Elegant Sign up',
-        href: routes.auth.signUp4,
-      },
-      {
-        name: 'Classic Sign up',
-        href: routes.auth.signUp5,
-      },
+      // {
+      //   name: 'Vintage Sign up',
+      //   href: routes.auth.signUp2,
+      // },
+      // {
+      //   name: 'Trendy Sign up',
+      //   href: routes.auth.signUp3,
+      // },
+      // {
+      //   name: 'Elegant Sign up',
+      //   href: routes.auth.signUp4,
+      // },
+      // {
+      //   name: 'Classic Sign up',
+      //   href: routes.auth.signUp5,
+      // },
     ],
   },
   {
@@ -414,22 +414,22 @@ export const menuItems = [
         name: 'Modern Sign in',
         href: routes.auth.signIn,
       },
-      {
-        name: 'Vintage Sign in',
-        href: routes.auth.signIn2,
-      },
-      {
-        name: 'Trendy Sign in',
-        href: routes.auth.signIn3,
-      },
-      {
-        name: 'Elegant Sign in',
-        href: routes.auth.signIn4,
-      },
-      {
-        name: 'Classic Sign in',
-        href: routes.auth.signIn5,
-      },
+      // {
+      //   name: 'Vintage Sign in',
+      //   href: routes.auth.signIn2,
+      // },
+      // {
+      //   name: 'Trendy Sign in',
+      //   href: routes.auth.signIn3,
+      // },
+      // {
+      //   name: 'Elegant Sign in',
+      //   href: routes.auth.signIn4,
+      // },
+      // {
+      //   name: 'Classic Sign in',
+      //   href: routes.auth.signIn5,
+      // },
     ],
   },
   {

@@ -75,7 +75,7 @@ export default function ForgetPasswordForm() {
       <Text className="mt-6 text-center text-[15px] leading-loose text-gray-500 lg:mt-9 xl:text-base">
         Don’t want to reset?{' '}
         <Link
-          href={routes.auth.signUp5}
+          href={routes.auth.signUp}
           className="font-semibold text-gray-700 transition-colors hover:text-primary"
         >
           Sign Up

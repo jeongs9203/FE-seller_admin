@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
 import { pagesOptions } from './pages-options';
+import Cookies from 'js-cookie';
 
 export const authOptions: NextAuthOptions = {
   // debug: true,
@@ -24,13 +25,14 @@ export const authOptions: NextAuthOptions = {
       }
 
       if (parsedUrl.searchParams.has('signin')) {
-        return `${baseUrl}${parsedUrl.searchParams.get('signin')}`;
+        return `${baseUrl}`;
       }
       if (parsedUrl.origin === baseUrl) {
         return url;
       }
       return baseUrl;
     },
+    
   },
   providers: [
     CredentialsProvider({
@@ -80,6 +82,7 @@ export const authOptions: NextAuthOptions = {
           // console.log('data', data)
           return res;
         } 
+        
         return null;
       },
     }),

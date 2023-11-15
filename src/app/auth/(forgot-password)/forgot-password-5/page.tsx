@@ -20,7 +20,7 @@ export default function ForgotPassword() {
         <div className="relative mx-auto aspect-[1/1.015] w-[540px] xl:w-[600px] 2xl:w-[636px]">
           <Image
             src={
-              'https://isomorphic-furyroad.s3.amazonaws.com/public/auth/sign-in-thumb5.webp'
+              'https://gentledog-back.duckdns.org/api/v1/vendor/signin'
             }
             alt="Sign Up Thumbnail"
             fill

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { routes } from '@/config/routes';
 import { Button } from '@/components/ui/button';
 import { exportToCSV } from '@/utils/export-to-csv';
-import { Data } from '@/data/shipment-data';
+import { shipmentData } from '@/data/shipment-data';
 import PageHeader from '@/app/shared/page-header';
 import ExportButton from '@/app/shared/export-button';
 import { PiPlusBold } from 'react-icons/pi';

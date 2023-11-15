@@ -91,7 +91,7 @@ export default function SignInForm() {
       <Text className="mt-6 text-center text-[15px] leading-loose text-gray-500 lg:mt-9 xl:text-base">
         Don’t have an account?{' '}
         <Link
-          href={routes.auth.signUp5}
+          href={routes.auth.signUp}
           className="font-bold text-gray-700 transition-colors hover:text-primary"
         >
           Sign Up
