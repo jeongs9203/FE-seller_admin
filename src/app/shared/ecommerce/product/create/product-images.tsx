@@ -15,6 +15,9 @@ interface ProductMediaProps {
   className?: string;
 }
 
+/**
+ * 상품 상세이미지
+ */
 export default function ProductImage({ className }: ProductMediaProps) {
   const {
     register,

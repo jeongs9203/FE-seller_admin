@@ -8,6 +8,9 @@ interface PricingInventoryProps {
   className?: string;
 }
 
+/**
+ * 가격 및 재고 관련 정보
+ */
 export default function PricingInventory({ className }: PricingInventoryProps) {
   return (
     <>

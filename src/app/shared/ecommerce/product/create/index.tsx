@@ -45,6 +45,9 @@ interface IndexProps {
   className?: string;
 }
 
+/**
+ * 상품 등록 폼
+ */
 export default function CreateProduct({ id, product, className }: IndexProps) {
   const [isLoading, setLoading] = useState(false);
   const methods = useForm<CreateProductInput>({

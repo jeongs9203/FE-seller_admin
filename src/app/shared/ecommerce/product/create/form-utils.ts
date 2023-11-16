@@ -263,13 +263,60 @@ export const colorOption = [
 ];
 
 // Variant option
-export const variantOption = [
+export const variantOption1 = [
   {
     value: 'single',
-    name: '색상',
+    name: '빨',
   },
   {
     value: 'multiple',
-    name: '사이즈',
+    name: '주',
+  },
+  {
+    value: 'multiple',
+    name: '노',
+  },
+  {
+    value: 'multiple',
+    name: '초',
+  },
+  {
+    value: 'multiple',
+    name: '파',
+  },
+  {
+    value: 'multiple',
+    name: '남',
+  },
+  {
+    value: 'multiple',
+    name: '보',
+  }
+];
+
+export const variantOption2 = [
+  {
+    value: 'single',
+    name: 'xs',
+  },
+  {
+    value: 'multiple',
+    name: 's',
+  },
+  {
+    value: 'multiple',
+    name: 'm',
+  },
+  {
+    value: 'multiple',
+    name: 'l',
+  },
+  {
+    value: 'multiple',
+    name: 'xl',
+  },
+  {
+    value: 'multiple',
+    name: 'xxl',
   },
 ];

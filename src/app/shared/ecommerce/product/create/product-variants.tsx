@@ -7,8 +7,9 @@ import FormGroup from '@/app/shared/form-group';
 import cn from '@/utils/class-names';
 import { useCallback } from 'react';
 import {
-  variantOption,
   productVariants,
+  variantOption1,
+  variantOption2,
 } from '@/app/shared/ecommerce/product/create/form-utils';
 import { Button } from '@/components/ui/button';
 import { ActionIcon } from '@/components/ui/action-icon';
@@ -21,6 +22,9 @@ const Select = dynamic(() => import('@/components/ui/select'), {
   loading: () => <SelectLoader />,
 });
 
+/**
+ * 상품 옵션
+ */
 export default function ProductVariants({ className }: { className?: string }) {
   const {
     control,
@@ -36,7 +40,10 @@ export default function ProductVariants({ className }: { className?: string }) {
   const addVariant = useCallback(() => append([...productVariants]), [append]);
 
   console.log('fields', fields);
-
+  fetch('/api/productVariants')
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
   return (
     <FormGroup
       title="옵션"
@@ -46,34 +53,41 @@ export default function ProductVariants({ className }: { className?: string }) {
       {fields.map((item, index) => (
         <div key={item.id} className="col-span-full flex gap-4 xl:gap-7">
           <Controller
-            name={`productVariants.${index}.name`}
+            name={`productVariants1.${index}.name`}
             control={control}
             render={({ field: { onChange, value } }) => (
               <Select
-                options={variantOption}
+                options={variantOption1}
                 value={value}
                 onChange={onChange}
-                label="옵션선택"
+                label="색상"
                 className="w-full @2xl:w-auto @2xl:flex-grow"
                 getOptionValue={(option) => option.name}
               />
             )}
           />
-          <Checkbox
-          type="text"
-          label="옵션값"
-          placeholder="150.00"
-          className="flex-grow"
-          prefix={'{label}'}
-          {...register(`productVariants.${index}.value`)}/>
-          <Input
+           <Controller
+            name={`productVariants2.${index}.name`}
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <Select
+                options={variantOption2}
+                value={value}
+                onChange={onChange}
+                label="사이즈"
+                className="w-full @2xl:w-auto @2xl:flex-grow"
+                getOptionValue={(option) => option.name}
+              />
+            )}
+          />
+          {/* <Input
             type="text"
             label="옵션값"
             placeholder="150.00"
             className="flex-grow"
-            prefix={'{label}'}
+            // prefix={'{label}'}
             {...register(`productVariants.${index}.value`)}
-          />
+          /> */}
           {fields.length > 1 && (
             <ActionIcon 
               onClick={() => remove(index)}

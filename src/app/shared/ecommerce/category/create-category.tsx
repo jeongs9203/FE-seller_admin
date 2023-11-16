@@ -265,7 +265,7 @@ export default function CreateCategory({
                       options={parentCategoryOption}
                       value={value}
                       onChange={onChange}
-                      label="대분류"
+                      label="카테고리"
                       error={errors?.parentCategory?.message}
                       getOptionValue={(option) => option.name}
                     />
@@ -279,7 +279,7 @@ export default function CreateCategory({
                       options={typeOption}
                       value={value}
                       onChange={onChange}
-                      label="소분류"
+                      label="소재"
                       error={errors?.type?.message}
                       getOptionValue={(option) => option.name}
                     />

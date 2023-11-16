@@ -21,6 +21,9 @@ const QuillEditor = dynamic(() => import('@/components/ui/quill-editor'), {
   loading: () => <QuillLoader className="col-span-full h-[143px]" />,
 });
 
+/**
+ * 상품 필수정보
+ */
 export default function ProductSummary({ className }: { className?: string }) {
   const {
     register,

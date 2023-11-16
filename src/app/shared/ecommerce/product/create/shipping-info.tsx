@@ -12,6 +12,9 @@ import { ActionIcon } from '@/components/ui/action-icon';
 import TrashIcon from '@/components/icons/trash';
 import { PiPlusBold } from 'react-icons/pi';
 
+/**
+ * 상품 배송비
+ */
 export default function ShippingInfo({ className }: { className?: string }) {
   const {
     control,
@@ -35,7 +38,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
       description="배송비를 입력해주세요"
       className={cn(className)}
     >
-      <Controller
+      {/* <Controller
         name="freeShipping"
         control={control}
         render={({ field: { value, onChange } }) => (
@@ -49,7 +52,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
             handlerClassName="dark:bg-gray-400"
           />
         )}
-      />
+      /> */}
 
       <Input
         label="배송가격"
