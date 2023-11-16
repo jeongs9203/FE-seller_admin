@@ -1,20 +1,21 @@
 export interface SellerSignUpType {
-    sellerName: string;
-    sellerPassword: string;
-    sellerEmail: string;
-    businessNumber: string;
-    businessType: string;
-    mailOrderNumber: string;
-    brandName: string;
-    brandLogoImageUrl: string;
-    brandContent: string;
-    homepageUrl: string;
-    companyName: string;
-    companyAddress: string;
-    opendAt: Date;
-    callCenterNumber: string;
-    phoneNumber: string;
-
+    vendorEmail: string,
+    businessNumber: string,
+    password: string,
+    confirmPassword: string,
+    mailOrderNumber: string,
+    brandName: string,
+    brandLogoImageUrl: string,
+    brandContent: string,
+    homepageUrl: string,
+    businessType: string,
+    companyName: string,
+    companyAddress: string,
+    openedAt: Date,
+    vendorName: string,
+    callCenterNumber: string,
+    managerName: string,
+    managerPhoneNumber: string
 }
 
 export interface SellerLoginType {

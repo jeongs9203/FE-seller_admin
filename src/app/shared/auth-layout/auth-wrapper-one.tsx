@@ -50,6 +50,14 @@ export default function AuthWrapperOne({
 
   const [randomNum, setRandomNum] = useState<number>(0);
 
+  const myDescription = description?.split('\n').map((line, index) => {
+    return (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    );
+  })
 
   useEffect(() => {
     setRandomNum(Math.floor(Math.random() * 3))
@@ -96,8 +104,8 @@ export default function AuthWrapperOne({
               >
                 {title}
               </Title>
-              <Text className=" leading-[1.85] text-gray-700 md:leading-loose lg:pe-8 2xl:pe-14">
-                {description}
+              <Text className="text-gray-700">
+                {myDescription}
               </Text>
             </div>
             {/* {isSocialLoginActive && (

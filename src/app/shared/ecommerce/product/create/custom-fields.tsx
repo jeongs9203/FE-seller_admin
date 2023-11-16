@@ -51,7 +51,7 @@ export default function CustomFields() {
         variant="outline"
         className="col-span-full ml-auto w-auto"
       >
-        <PiPlusBold className="me-2 h-4 w-4" strokeWidth={2} /> Add Item
+        {/* <PiPlusBold className="me-2 h-4 w-4" strokeWidth={2} /> Add Item */}
       </Button>
     </>
   );
