@@ -21,6 +21,8 @@ import Upload from '@/components/ui/upload';
 import { useModal } from '@/app/shared/modal-views/use-modal';
 import SimpleBar from '@/components/ui/simplebar';
 import { toast } from 'react-hot-toast';
+import { set } from 'lodash';
+import AWS from 'aws-sdk';
 
 type AcceptedFiles = 'img' | 'pdf' | 'csv' | 'imgAndPdf' | 'all';
 
@@ -30,17 +32,21 @@ export default function FileUploadImage({
   fieldLabel,
   multiple = true,
   accept = 'all',
+  className,
+  setImgUrl,
 }: {
   label?: string;
   fieldLabel?: string;
   btnLabel?: string;
   multiple?: boolean;
   accept?: AcceptedFiles;
+  className?: string;
+  setImgUrl?: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const { closeModal } = useModal();
 
   return (
-    <div className="m-auto pb-8 pt-5 @lg:pt-6 @2xl:px-7">
+    <div className={`m-auto pb-8 pt-5 @lg:pt-6 w-full ${className ? className : ''}`}>
       <div className="mb-6 flex items-center justify-between">
         <p className='-mb-3'>
           {label}
@@ -60,9 +66,10 @@ export default function FileUploadImage({
 
       <FileInput
         accept={accept}
-        multiple={multiple}
+        multiple={false}
         label={fieldLabel}
         btnLabel={btnLabel}
+        setImgUrl = {setImgUrl}
       />
     </div>
   );
@@ -81,40 +88,67 @@ const fileType = {
 export const FileInput = ({
   label,
   btnLabel = 'Upload',
-  multiple = true,
+  multiple = false,
   accept = 'img',
   className,
+  setImgUrl,
 }: {
   className?: string;
   label?: React.ReactNode;
   multiple?: boolean;
   btnLabel?: string;
   accept?: AcceptedFiles;
+  setImgUrl?: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+
+  AWS.config.update({
+    region: process.env.AWS_REGION as string,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+  });
+  
   const { closeModal } = useModal();
   const [files, setFiles] = useState<Array<File>>([]);
+  // const [file, setFile] = useState<File | null>(null);
   const imageRef = useRef<HTMLInputElement>(null);
 
   function handleFileDrop(event: React.ChangeEvent<HTMLInputElement>) {
     const uploadedFiles = (event.target as HTMLInputElement).files;
-    const newFiles = Object.entries(uploadedFiles as object)
-      .map((file) => {
-        if (file[1]) return file[1];
-      })
-      .filter((file) => file !== undefined);
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    // const newFiles = Object.entries(uploadedFiles as object)
+    //   .map((file) => {
+    //     if (file[1]) return file[1];
+    //   })
+    //   .filter((file) => file !== undefined);
+    // setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+    setFiles(uploadedFiles?.length ? [uploadedFiles[0]] : []);
   }
 
   function handleImageDelete(index: number) {
     const updatedFiles = files.filter((_, i) => i !== index);
     setFiles(updatedFiles);
+    setImgUrl && setImgUrl('');
     (imageRef.current as HTMLInputElement).value = '';
   }
 
-  function handleFileUpload() {
+  const handleFileUpload = async () => {
     if (files.length) {
       console.log('uploaded files:', files);
       toast.success(<Text as="b">File successfully added</Text>);
+      // const file = files[0];
+      // console.log(file)
+
+      const upload = new AWS.S3.ManagedUpload({
+        params: {
+          ACL: "public-read",
+          Body: files[0],
+          Key: "contents/" + files[0].name,
+          Bucket: process.env.AWS_BUCKET_NAME as string,
+        },
+      });
+  
+      const promise = upload.promise();
+      console.log("promise", (await promise).Location);
+      setImgUrl && setImgUrl((await promise).Location as string);
 
       setTimeout(() => {
         closeModal();
@@ -132,7 +166,7 @@ export const FileInput = ({
         accept={accept}
         multiple={multiple}
         onChange={(event) => handleFileDrop(event)}
-        className="mb-6 min-h-[280px] justify-center border-dashed bg-gray-50 dark:bg-transparent"
+        className="mb-6 min-h-[150px] justify-center border-dashed bg-gray-50 dark:bg-transparent"
       />
 
       {files.length > 1 ? (
@@ -192,3 +226,7 @@ export const FileInput = ({
     </div>
   );
 };
+function setS3location(Location: string) {
+  throw new Error('Function not implemented.');
+}
+

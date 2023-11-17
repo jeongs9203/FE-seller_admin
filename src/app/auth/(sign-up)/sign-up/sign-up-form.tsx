@@ -1,5 +1,4 @@
 'use client';
-
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Password } from '@/components/ui/password';
@@ -9,12 +8,16 @@ import { Title, Text } from '@/components/ui/text';
 import Link from 'next/link';
 import { Form } from '@/components/ui/form';
 import * as z from 'zod';
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react'
 import { PiArrowRightBold } from 'react-icons/pi';
 import { routes } from '@/config/routes';
 import { SellerSignUpType } from 'types/seller/seller';
 import { Textarea } from 'rizzui';
 import FileUploadImage from '@/app/shared/file-upload_image';
+import Upload from '@/components/ui/upload';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import DaumPostcode from 'react-daum-postcode';
 
 const initialValues = {
   vendorEmail: '',
@@ -35,7 +38,6 @@ const initialValues = {
   managerName: '',
   managerPhoneNumber: ''
 };
-
 
 const signUpFormSchema = z.object({
   firstName: z.string().min(1, { message: 'First name is require' }),
@@ -68,33 +70,57 @@ const signUpFormSchema = z.object({
 
 export default function SignUpForm() {
   const [reset, setReset] = useState({});
-
+  const router = useRouter();
   const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
+
+    console.log(data);
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          vendorEmail: data.vendorEmail,
+          businessNumber: data.businessNumber,
+          password: data.password,
+          mailOrderNumber: data.mailOrderNumber,
+          brandName: data.brandName,
+          brandLogoImageUrl: "http://test.com",
+          brandContent: data.brandContent,
+          homepageUrl: data.homepageUrl,
+          businessType: data.businessType,
+          companyName: data.companyName,
+          companyAddress: data.companyAddress,
+          openedAt: data.openedAt,
+          vendorName: data.brandName,
+          callCenterNumber: data.callCenterNumber,
+          managerName: data.managerName,
+          managerPhoneNumber: data.managerPhoneNumber
+        }),
       });
     
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Error status:', response.status);
-        console.error('Error data:', errorData);
-        throw new Error('회원가입 요청에 실패했습니다.');
-      }
-    
-      const responseData = await response.json();
+      const responseData:any = await response.json();
       console.log(responseData);
+      if(responseData?.isSuccess) {
+        toast.success(
+          <Text>
+            회원가입이 완료되었습니다.
+          </Text>
+        )}
+
+        router.push('/signin')
     
-      setReset({ ...initialValues, isAgreed: false });
     } catch (error) {
       console.error(error);
+      setReset({ ...initialValues, isAgreed: false });
     }
   };
-  
+
+  const handleClick = () => {
+    open(undefined as any);
+  };
+
   return (
     <>
       <Form<SellerSignUpType>
@@ -128,9 +154,14 @@ export default function SignUpForm() {
               {...register('homepageUrl')}
               error={errors.homepageUrl?.message}
             />
-            <div className='col-span-2'>
-              <FileUploadImage label = "회사로고 이미지"/>
-            </div>
+            
+              <FileUploadImage 
+                label = "회사로고 이미지"
+                className = "col-span-2"
+                multiple = {false}
+                {...register('brandLogoImageUrl')}
+              />
+           
             <Textarea
               size="lg"
               label="회사 상품소개 및 관련내용"
@@ -162,17 +193,25 @@ export default function SignUpForm() {
               {...register('businessNumber')}
               error={errors.businessNumber?.message}
             />
-            <Input
-              type="text"
-              size="lg"
-              label="사업장 주소"
-              className="[&>label>span]:font-medium"
-              inputClassName="text-sm"
-              color="info"
-              placeholder="Enter your add"
-              {...register('companyAddress')}
-              error={errors.companyAddress?.message}
-            />
+            <div className='flex-col'>
+              <Input
+                type="text"
+                size="lg"
+                label="사업장 주소"
+                className="[&>label>span]:font-medium"
+                inputClassName="text-sm"
+                color="info"
+                placeholder="Enter your add"
+                {...register('companyAddress')}
+                error={errors.companyAddress?.message}
+                />
+              <div className='flex-col w-full'>
+                <DaumPostcode className="" autoClose/>
+                <Button className="w-1/4 min-w-[110px]" onClick={handleClick}>
+                확인
+                </Button>
+              </div>
+            </div>
             <Input
               type="text"
               size="lg"
