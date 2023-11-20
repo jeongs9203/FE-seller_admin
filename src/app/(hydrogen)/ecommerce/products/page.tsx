@@ -8,8 +8,9 @@ import ProductsTable from '@/app/shared/ecommerce/product/product-list/table';
 import { PiArrowLineDownBold, PiPlusBold } from 'react-icons/pi';
 import { productsData } from '@/data/products-data';
 import { exportToCSV } from '@/utils/export-to-csv';
-import { productListType } from 'types/product/product';
+import { ProductSizeType } from 'types/responseData';
 import { useEffect, useState } from 'react';
+import { productListType } from 'types/product/product';
 
 const pageHeader = {
   title: '상품목록',
@@ -34,7 +35,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('/api/product');
+      const response = await fetch('https://gentledog-back.duckdns.org/api/v1/product/product-create');
       const data:any = await response.json() as any;
       setAdminProductDatas(data.result);
     }
@@ -44,7 +45,7 @@ export default function ProductsPage() {
   function handleExportData() {
     exportToCSV(
       productsData,
-      'loginId, count, product_name, price, product_code, img_url, brand_name, brand_logo_url, main_img_used, thumbnail_img_used, discount, discount_type, parent_category, category_name, color, size,',
+      'vendorEmail, productName, productPrice, brandName, brandLogoUrl, categoryCode, sizeCodeId, colorCodeId, mainImageUsed, imageUrl, thumbnailImageUsed, salesCount, productCode, productId, discount, discountType,',
       'product_data'
     );
   }

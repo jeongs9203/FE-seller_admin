@@ -55,6 +55,19 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
     resolver: zodResolver(productFormSchema),
   });
 
+  fetch('/api/v1/product/product-create')
+  .then(response => {
+    const contentType = response.headers.get('content-type');
+    
+    if (contentType && contentType.includes('application/json')) {
+      return response.json();
+    } else {
+      throw new TypeError('Oops, we haven\'t got JSON!');
+    }
+  })
+  .then(json => { /* process your JSON further */ })
+  .catch(error => console.error(error));
+
   const onSubmit: SubmitHandler<CreateProductInput> = (data) => {
     setLoading(true);
     setTimeout(() => {

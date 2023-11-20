@@ -68,7 +68,9 @@ const signUpFormSchema = z.object({
   isAgreed: z.boolean(),
 });
 
+
 export default function SignUpForm() {
+  const [imgUrl, setImgUrl] = useState<string>('');
   const [reset, setReset] = useState({});
   const router = useRouter();
   const onSubmit: SubmitHandler<SellerSignUpType> = async (data) => {
@@ -86,7 +88,7 @@ export default function SignUpForm() {
           password: data.password,
           mailOrderNumber: data.mailOrderNumber,
           brandName: data.brandName,
-          brandLogoImageUrl: "http://test.com",
+          brandLogoImageUrl: imgUrl,
           brandContent: data.brandContent,
           homepageUrl: data.homepageUrl,
           businessType: data.businessType,
@@ -117,9 +119,26 @@ export default function SignUpForm() {
     }
   };
 
-  const handleClick = () => {
-    open(undefined as any);
-  };
+  const [open, setOpen] = useState(false);
+  const [address, setAddress] = useState('');
+
+  const handleAddress = (data: any) => {
+    let fullAddress = data.address;
+    let extraAddress = ''; 
+
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddress += (extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName);
+      }
+      fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
+    }
+
+    setAddress(fullAddress);
+    setOpen(false);
+  }
 
   return (
     <>
@@ -160,6 +179,7 @@ export default function SignUpForm() {
                 className = "col-span-2"
                 multiple = {false}
                 {...register('brandLogoImageUrl')}
+                setImgUrl = {setImgUrl}
               />
            
             <Textarea
@@ -202,14 +222,19 @@ export default function SignUpForm() {
                 inputClassName="text-sm"
                 color="info"
                 placeholder="Enter your add"
-                {...register('companyAddress')}
+                {...register('companyAddress', { value: address })}
                 error={errors.companyAddress?.message}
-                />
+                value={address? address : ''}
+              />
               <div className='flex-col w-full'>
-                <DaumPostcode className="" autoClose/>
-                <Button className="w-1/4 min-w-[110px]" onClick={handleClick}>
-                확인
+                <Button className="w-1/4 min-w-[110px]" onClick={() => setOpen(true)}>
+                  주소 검색
                 </Button>
+                {open && 
+                <div>
+                  <DaumPostcode onComplete={(data) => handleAddress(data)} autoClose />
+                </div>
+                }
               </div>
             </div>
             <Input

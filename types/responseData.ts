@@ -35,10 +35,16 @@ export interface ProductRegistrationType {
 export interface ImageUploadType {
     productId: number;
     imageUrl: string;
-    imageComent: string;
     mainImageUsed: string;
     thumbnailImageUsed: string;
+    imageComent: string;
     price: number;
+    discount: number;
+    discountType: number;
+    categoryId: number;
+    registerDate: Date;
+    colorCodeId: number;
+    sizeCodeId: number;
 }
 
 export interface ProductModifyType {

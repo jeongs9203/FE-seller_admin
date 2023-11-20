@@ -12,22 +12,22 @@ export interface productListType {
 }
 
 export interface productCreateType {
-    salesCount: number,
-    productName: string,
-    price: number,
-    productCode: string,
-    mainImgUrl: string,
-    productImgUrl: string[],
-    productExplainImgUrl: string[],  
-    discount: number,
-    discountType: number,
-    childCategoryId: number,
-    parentCategoryId: number,
-    colorCodeId : number[],
-    sizeId: number[],
-    shippingFee: number,
-    isShippingFree: boolean,
-    isDisplay: number,
+    vendorEmail: string;
+    productName: string;
+    productPrice: number;
+    brandName: string;
+    brandLogoUrl: string;
+    categoryCode: number;
+    sizeCodeId: number;
+    colorCodeId: number;
+    mainImageUsed: string;
+    imageUrl: string;
+    thumbnailImageUsed: string;
+    salesCount: number;
+    productCode: number;
+    productId: number;
+    discount: number;
+    discountType: number;
 }
 
 export interface productImageType {
@@ -75,6 +75,12 @@ export interface ImageUploadType {
     mainImageUsed: string;
     thumbnailImageUsed: string;
     price: number;
+    discount: number;
+    discountType: number;
+    categoryId: number;
+    registerDate: Date;
+    colorCodeId: number;
+    sizeCodeId: number;
 }
 
 export interface ProductModifyType {
@@ -116,6 +122,5 @@ export interface ProductInquiryType {
 }
 
 export interface ProductDeleteType {
-    productId: number;
     productCode: number;
 }
