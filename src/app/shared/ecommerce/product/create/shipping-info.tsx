@@ -80,7 +80,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
 
       {fields.map((item, index) => (
         <div key={item.id} className="col-span-full flex gap-4 xl:gap-7">
-          <Input
+          {/* <Input
             label="Location Name"
             placeholder="location name"
             className="flex-grow"
@@ -91,7 +91,7 @@ export default function ShippingInfo({ className }: { className?: string }) {
             placeholder="150.00"
             className="flex-grow"
             {...register(`locationShipping.${index}.value`)}
-          />
+          /> */}
           {fields.length > 1 && (
             <ActionIcon
               onClick={() => remove(index)}
@@ -103,13 +103,13 @@ export default function ShippingInfo({ className }: { className?: string }) {
           )}
         </div>
       ))}
-      <Button
+      {/* <Button
         onClick={addCustomField}
         variant="outline"
         className="col-span-full ml-auto w-auto"
       >
-        {/* <PiPlusBold className="me-2 h-4 w-4" strokeWidth={2} /> Add Item */}
-      </Button>
+        <PiPlusBold className="me-2 h-4 w-4" strokeWidth={2} /> 배송비 추가
+      </Button> */}
     </FormGroup>
   );
 }

@@ -5,6 +5,7 @@ import { PiPlusBold } from 'react-icons/pi';
 import PageHeader from '@/app/shared/page-header';
 import CreateProduct from '@/app/shared/ecommerce/product/create';
 
+
 const pageHeader = {
   title: '상품등록',
   breadcrumb: [
@@ -23,6 +24,7 @@ const pageHeader = {
 };
 
 export default function CreateProductPage() {
+  
   return (
     <>
       <PageHeader title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>

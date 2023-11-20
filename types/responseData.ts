@@ -14,21 +14,22 @@ export interface ProductCategoryType {
 }
 
 export interface ProductRegistrationType {
-    loginId: string;
-    salesCount: number;
+    vendorEmail: string;
     productName: string;
-    price: number;
+    productPrice: number;
+    brandName: string;
+    brandLogoUrl: string;
+    categoryCode: number;
+    sizeCodeId: number;
+    colorCodeId: number;
+    mainImageUsed: string;
+    imageUrl: string;
+    thumbnailImageUsed: string;
+    salesCount: number;
     productCode: number;
     productId: number;
-    imageUrl: string;
-    mainImageUsed: string;
-    ImageUrl: string;
-    thumbnailImageUsed: string;
     discount: number;
     discountType: number;
-    categoryId: number;
-    colorCodeId: number;
-    sizeCodeId: number;
 }
 
 export interface ImageUploadType {

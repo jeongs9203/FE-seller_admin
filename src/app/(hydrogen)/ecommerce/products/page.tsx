@@ -40,7 +40,7 @@ export default function ProductsPage() {
     }
     getData();
   }, []);
-
+   console.log(adminProductDatas);
   function handleExportData() {
     exportToCSV(
       productsData,
