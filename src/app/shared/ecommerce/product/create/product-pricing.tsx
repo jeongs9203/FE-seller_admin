@@ -17,14 +17,14 @@ export default function ProductPricing() {
         prefix={'￦'}
         type="number"
       />
-      <Input
+      {/* <Input
         label="할인가격"
         placeholder="ex.20"
         {...register('salePrice')}
         error={errors.salePrice?.message as string}
         prefix={'￦'}
         type="number"
-      />
+      /> */}
     </>
   );
 }

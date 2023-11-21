@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Element } from 'react-scroll';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,6 +25,9 @@ import ProductImage from '@/app/shared/ecommerce/product/create/product-images';
 import ProductVariants from '@/app/shared/ecommerce/product/create/product-variants';
 import ProductTaxonomies from '@/app/shared/ecommerce/product/create/product-tags';
 import FormFooter from '@/components/form-footer';
+import { ProductRegistrationType } from 'types/responseData';
+import { useSession } from 'next-auth/react';
+import { data } from '@/app/shared/logistics/shipment/details/tracking-history';
 
 const MAP_STEP_TO_COMPONENT = {
   [formParts.summary]: ProductSummary,
@@ -55,8 +58,17 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
     resolver: zodResolver(productFormSchema),
   });
 
-  fetch('/api/v1/product/product-create')
-  .then(response => {
+console.log('product', product);
+  const session = useSession();
+  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization' : `Bearer ${session?.data?.user.accessToken}`
+    },
+    body: JSON.stringify(product),
+  })
+  .then(response =>   {
     const contentType = response.headers.get('content-type');
     
     if (contentType && contentType.includes('application/json')) {

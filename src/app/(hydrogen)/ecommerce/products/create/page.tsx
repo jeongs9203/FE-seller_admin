@@ -41,7 +41,6 @@ export default function CreateProductPage() {
         },
         body: JSON.stringify(product),
       });
-
       if (!response.ok) {
         throw new Error(response.statusText);
       }

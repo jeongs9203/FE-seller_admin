@@ -31,7 +31,7 @@ export default function ProductVariants({ className }: { className?: string }) {
     register,
     formState: { errors },
   } = useFormContext();
-
+  
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'productVariants',
@@ -40,7 +40,7 @@ export default function ProductVariants({ className }: { className?: string }) {
   const addVariant = useCallback(() => append([...productVariants]), [append]);
 
   console.log('fields', fields);
-  fetch('/api/productVariants')
+  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));

@@ -19,17 +19,15 @@ export interface ProductRegistrationType {
     productPrice: number;
     brandName: string;
     brandLogoUrl: string;
-    categoryCode: number;
-    sizeCodeId: number;
-    colorCodeId: number;
+    categoryName: string;
+    sizeName: string;
+    colorName: string;
+    explainImageUrl: string;
+    imageName: string;
+    thumbnailImageUrl: string;
     mainImageUsed: string;
     imageUrl: string;
     thumbnailImageUsed: string;
-    salesCount: number;
-    productCode: number;
-    productId: number;
-    discount: number;
-    discountType: number;
 }
 
 export interface ImageUploadType {
