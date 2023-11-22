@@ -41,7 +41,7 @@ export default function ProductVariants({ className }: { className?: string }) {
   const addVariant = useCallback(() => append([...productVariants]), [append]);
 
   console.log('fields', fields);
-  fetch(`${process.env.BASE_API_URL}/api/v1/product/product-create`)
+  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));
