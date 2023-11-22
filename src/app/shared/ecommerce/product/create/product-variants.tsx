@@ -17,6 +17,7 @@ import TrashIcon from '@/components/icons/trash';
 import SelectLoader from '@/components/loader/select-loader';
 import { PiPlusBold } from 'react-icons/pi';
 import { Checkbox } from '@/components/ui/checkbox';
+
 const Select = dynamic(() => import('@/components/ui/select'), {
   ssr: false,
   loading: () => <SelectLoader />,
@@ -40,7 +41,7 @@ export default function ProductVariants({ className }: { className?: string }) {
   const addVariant = useCallback(() => append([...productVariants]), [append]);
 
   console.log('fields', fields);
-  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`)
+  fetch(`${process.env.BASE_API_URL}/api/v1/product/product-create`)
   .then(response => response.json())
   .then(data => console.log(data))
   .catch(error => console.error('Error:', error));

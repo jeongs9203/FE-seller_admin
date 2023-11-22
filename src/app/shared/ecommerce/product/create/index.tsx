@@ -60,13 +60,14 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
 
 console.log('product', product);
   const session = useSession();
-  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
+  fetch(`${process.env.BASE_API_URL}/api/v1/product/product-create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization' : `Bearer ${session?.data?.user.accessToken}`
     },
     body: JSON.stringify(product),
+   
   })
   .then(response =>   {
     const contentType = response.headers.get('content-type');

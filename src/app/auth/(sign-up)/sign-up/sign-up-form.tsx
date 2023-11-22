@@ -77,7 +77,7 @@ export default function SignUpForm() {
 
     console.log(data);
     try {
-      const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor/signup`, {
+      const response = await fetch(`${process.env.BASE_API_URL}/api/v1/vendor/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

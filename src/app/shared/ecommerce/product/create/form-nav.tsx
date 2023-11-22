@@ -44,7 +44,7 @@ export const menuItems = [
   // },
   {
     id: 5,
-    label: '배송정보',
+    label: '배송비',
     value: formParts.shipping,
   },
   // {
