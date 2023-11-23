@@ -129,3 +129,11 @@ export interface SellerStatisticType {
     salesPrice: number;
     salesDate: Date;
 }
+
+export interface commonResType {
+    httpStatus: string;
+    isSuccess: boolean;
+    message: string;
+    code: number;
+    result: any;
+}

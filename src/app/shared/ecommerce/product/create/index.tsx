@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Element } from 'react-scroll';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,9 +12,9 @@ import FormNav, {
 } from '@/app/shared/ecommerce/product/create/form-nav';
 import ProductSummary from '@/app/shared/ecommerce/product/create/product-summary';
 import {
+  productFormData,
+  CreateProductGentleInput,
   defaultValues,
-  productFormSchema,
-  CreateProductInput,
 } from '@/app/shared/ecommerce/product/create/form-utils';
 import ProductMedia from '@/app/shared/ecommerce/product/create/product-media';
 import PricingInventory from '@/app/shared/ecommerce/product/create/pricing-inventory';
@@ -28,6 +28,7 @@ import FormFooter from '@/components/form-footer';
 import { ProductRegistrationType } from 'types/responseData';
 import { useSession } from 'next-auth/react';
 import { data } from '@/app/shared/logistics/shipment/details/tracking-history';
+import { productCreateImageType } from 'types/product/product';
 
 const MAP_STEP_TO_COMPONENT = {
   [formParts.summary]: ProductSummary,
@@ -35,16 +36,16 @@ const MAP_STEP_TO_COMPONENT = {
   [formParts.pricingInventory]: PricingInventory,
   [formParts.productImg]: ProductImage,
   // [formParts.productIdentifiers]: ProductIdentifiers,
-  [formParts.shipping]: ShippingInfo,
+  // [formParts.shipping]: ShippingInfo,
   // [formParts.seo]: ProductSeo,
   // [formParts.deliveryEvent]: DeliveryEvent,
   [formParts.variantOptions]: ProductVariants,
-  [formParts.tagsAndCategory]: ProductTaxonomies,
+  // [formParts.tagsAndCategory]: ProductTaxonomies,
 };
 
 interface IndexProps {
   id?: string;
-  product?: CreateProductInput;
+  product?: CreateProductGentleInput;
   className?: string;
 }
 
@@ -52,45 +53,57 @@ interface IndexProps {
  * 상품 등록 폼
  */
 export default function CreateProduct({ id, product, className }: IndexProps) {
+
   const [isLoading, setLoading] = useState(false);
-  const methods = useForm<CreateProductInput>({
+  const [productImage, setProductImage] = useState<productCreateImageType[]>([]);
+  const [detailImage, setDetailImage] = useState<productCreateImageType[]>([]);
+
+  const methods = useForm<CreateProductGentleInput>({
     defaultValues: defaultValues(product),
-    resolver: zodResolver(productFormSchema),
+    resolver: zodResolver(productFormData),
   });
-
-console.log('product', product);
+      
   const session = useSession();
-  fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${session?.data?.user.accessToken}`
-    },
-    body: JSON.stringify(product),
-   
-  })
-  .then(response =>   {
-    const contentType = response.headers.get('content-type');
-    
-    if (contentType && contentType.includes('application/json')) {
-      return response.json();
-    } else {
-      throw new TypeError('Oops, we haven\'t got JSON!');
-    }
-  })
-  .then(json => { /* process your JSON further */ })
-  .catch(error => console.error(error));
+  const onSubmit: SubmitHandler<CreateProductGentleInput> = () => {
 
-  const onSubmit: SubmitHandler<CreateProductInput> = (data) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      console.log('product_data', data);
-      toast.success(
-        <Text as="b">Product successfully {id ? 'updated' : 'created'}</Text>
-      );
-      methods.reset();
-    }, 600);
+
+    console.log("inputdata", product);
+    console.log(session?.data?.user.accessToken);
+    const pyaload = {
+      productImage: productImage,
+      detailImage: detailImage,
+
+    }
+
+    console.log('pyaload', pyaload);
+    // fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization' : `Bearer ${session?.data?.user.accessToken}`
+    //   },
+    //   body: JSON.stringify(product),
+    // })
+    // .then(response =>   {
+    //   const contentType = response.headers.get('content-type');
+      
+    //   if (contentType && contentType.includes('application/json')) {
+    //     return response.json();
+    //   } else {
+    //     throw new TypeError('Oops, we haven\'t got JSON!');
+    //   }
+    // })
+    // .then(json => { /* process your JSON further */ })
+    // .catch(error => console.error(error));
+    // setLoading(true);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   console.log('product_data', data);
+    //   toast.success(
+    //     <Text as="b">Product successfully {id ? 'updated' : 'created'}</Text>
+    //   );
+    //   methods.reset();
+    // }, 600);
   };
 
   return (
@@ -108,7 +121,12 @@ console.log('product', product);
                 key={key}
                 name={formParts[key as keyof typeof formParts]}
               >
-                {<Component className="pt-7 @2xl:pt-9 @3xl:pt-11" />}
+                {
+                 <Component className="pt-7 @2xl:pt-9 @3xl:pt-11" 
+                  setProductImage = {setProductImage} productImage = {productImage} 
+                  setDetailImage = {setDetailImage} detailImage = {detailImage}
+                 /> 
+                }
               </Element>
             ))}
           </div>

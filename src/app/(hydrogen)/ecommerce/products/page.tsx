@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import { routes } from '@/config/routes';
 import { Button } from '@/components/ui/button';
@@ -11,6 +9,8 @@ import { exportToCSV } from '@/utils/export-to-csv';
 import { ProductSizeType } from 'types/responseData';
 import { useEffect, useState } from 'react';
 import { productListType } from 'types/product/product';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/auth-options';
 
 const pageHeader = {
   title: '상품목록',
@@ -29,26 +29,35 @@ const pageHeader = {
   ],
 };
 
-export default function ProductsPage() {
-
-  const [adminProductDatas, setAdminProductDatas] = useState<productListType[]>();
-
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch('https://gentledog-back.duckdns.org/api/v1/product/product-create');
-      const data:any = await response.json() as any;
-      setAdminProductDatas(data.result);
+async function getAdminProductDatas() {
+  const session = await getServerSession(authOptions);
+  console.log(session?.user?.accessToken)
+  const response = await fetch('https://gentledog-back.duckdns.org/api/v1/vendor-product/vendor-products'
+  ,{
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session?.user?.accessToken}`,
+      'email' : `${session?.user?.email}`
     }
-    getData();
-  }, []);
-   console.log(adminProductDatas);
-  function handleExportData() {
-    exportToCSV(
-      productsData,
-      'vendorEmail, productName, productPrice, brandName, brandLogoUrl, categoryCode, sizeCodeId, colorCodeId, mainImageUsed, imageUrl, thumbnailImageUsed, salesCount, productCode, productId, discount, discountType,',
-      'product_data'
-    );
-  }
+  
+  });
+  const data:any = await response.json() as any;
+  console.log(data.result);
+  return data.result;
+}
+
+export default async function ProductsPage() {
+
+  const productsData = await getAdminProductDatas();
+  
+  // function handleExportData() {
+  //   exportToCSV(
+  //     productsData,
+  //     'vendorEmail, productName, productPrice, brandName, brandLogoUrl, categoryCode, sizeCodeId, colorCodeId, mainImageUsed, imageUrl, thumbnailImageUsed, salesCount, productCode, productId, discount, discountType,',
+  //     'product_data'
+  //   );
+  // }
 
   return (
     <>
@@ -57,7 +66,7 @@ export default function ProductsPage() {
           <Button
             variant="outline"
             className="w-full @lg:w-auto"
-            onClick={() => handleExportData()}
+            // onClick={() => handleExportData()}
           >
             <PiArrowLineDownBold className="me-1.5 h-[17px] w-[17px]" />
             다운로드
@@ -76,7 +85,10 @@ export default function ProductsPage() {
           </Link>
         </div>
       </PageHeader>
-      <ProductsTable data={productsData} />
+      {
+        productsData && productsData.length > 0 ? (<ProductsTable data={productsData} />) : null
+      }
+      
     </>
   );
 }

@@ -30,6 +30,11 @@ export interface productCreateType {
     discountType: number;
 }
 
+export interface productCreateImageType {
+    imageName: string;
+    imageUrl: string;
+}
+  
 export interface productImageType {
     productImageId: number;
     productImage: string;

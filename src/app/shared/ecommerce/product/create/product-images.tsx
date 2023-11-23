@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import FormGroup from '@/app/shared/form-group';
@@ -10,15 +10,17 @@ import { Radio } from '@/components/ui/radio';
 import TrashIcon from '@/components/icons/trash';
 import Upload from '@/components/ui/upload';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { productCreateImageType } from 'types/product/product';
+import FileUploadImageProductDetail from '@/app/shared/file-upload_product_detail_image';
 
 interface ProductMediaProps {
   className?: string;
+  setDetailImage?: React.Dispatch<SetStateAction<productCreateImageType[]>>;
+  detailImage?: productCreateImageType[];
+
 }
 
-/**
- * 상품 상세이미지
- */
-export default function ProductImage({ className }: ProductMediaProps) {
+export default function ProductImage({ className, detailImage, setDetailImage }: ProductMediaProps) {
   const {
     register,
     control,
@@ -35,7 +37,16 @@ export default function ProductImage({ className }: ProductMediaProps) {
       description="상세이미지를 업로드해주세요"
       className={cn(className)}
     >
-      <MultipleFiles className="col-span-2" label="Images" />
+      {
+        detailImage && setDetailImage &&
+        <FileUploadImageProductDetail 
+          label = "상품상세이미지"
+          className = "col-span-2"
+          multiple = {true}
+          detailImage = {detailImage}
+          setDetailImage = {setDetailImage}
+        />
+      }
     </FormGroup>
     </div>
   );

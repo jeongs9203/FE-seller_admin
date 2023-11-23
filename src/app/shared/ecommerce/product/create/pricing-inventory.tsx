@@ -28,13 +28,13 @@ export default function PricingInventory({ className }: PricingInventoryProps) {
       >
         <InventoryTracing />
       </FormGroup> */}
-      <FormGroup
+      {/* <FormGroup
         title="상품현황"
         description="상품 현황을 선택해주세요"
         className={cn(className)}
       >
         <ProductAvailability />
-      </FormGroup>
+      </FormGroup> */}
     </>
   );
 }

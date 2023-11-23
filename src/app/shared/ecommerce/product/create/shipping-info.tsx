@@ -38,22 +38,6 @@ export default function ShippingInfo({ className }: { className?: string }) {
       description="배송비를 입력해주세요"
       className={cn(className)}
     >
-      {/* <Controller
-        name="freeShipping"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <Switch
-            label="배송비 무료"
-            className="col-span-full"
-            value={value}
-            checked={value}
-            onChange={onChange}
-            switchClassName="dark:border-gray-400 "
-            handlerClassName="dark:bg-gray-400"
-          />
-        )}
-      /> */}
-
       <Input
         label="배송가격"
         placeholder="3000"
@@ -61,23 +45,9 @@ export default function ShippingInfo({ className }: { className?: string }) {
         error={errors.shippingPrice?.message as string}
         prefix={'￦'}
         type="number"
+        className='col-span-2'
       />
-      {/* <Controller
-        name="locationBasedShipping"
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <Switch
-            label="국내배송"
-            className="col-span-full"
-            value={value}
-            checked={value}
-            onChange={onChange}
-            switchClassName="dark:border-gray-400 "
-            handlerClassName="dark:bg-gray-400"
-          />
-        )}
-      /> */}
-
+     
       {fields.map((item, index) => (
         <div key={item.id} className="col-span-full flex gap-4 xl:gap-7">
           {/* <Input

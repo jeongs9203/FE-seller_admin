@@ -11,11 +11,12 @@ export default function ProductPricing() {
     <>
       <Input
         label="소비자가격"
-        placeholder="ex.10"
-        {...register('price')}
-        error={errors.price?.message as string}
+        placeholder="ex.20000"
+        {...register('productPrice')}
+        error={errors.productPrice?.message as string}
         prefix={'￦'}
-        type="number"
+        type="text"
+        className='col-span-2'
       />
       {/* <Input
         label="할인가격"
