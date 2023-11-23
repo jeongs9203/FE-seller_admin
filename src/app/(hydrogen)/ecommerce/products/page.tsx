@@ -32,13 +32,13 @@ const pageHeader = {
 async function getAdminProductDatas() {
   const session = await getServerSession(authOptions);
   console.log(session?.user?.accessToken)
-  const response = await fetch('https://gentledog-back.duckdns.org/api/v1/vendor-product/vendor-products'
+  const response = await fetch(`${process.env.BASE_API_URL}api/v1/vendor-product/vendor-products`
   ,{
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${session?.user?.accessToken}`,
-      'email' : `${session?.user?.email}`
+      'email' : `${session?.user?.vendorEmail}`
     }
   
   });

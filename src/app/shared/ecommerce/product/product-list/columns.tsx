@@ -15,6 +15,7 @@ import AvatarCard from '@/components/ui/avatar-card';
 import { ProductType } from '@/data/products-data';
 import { PiStarFill } from 'react-icons/pi';
 import DeletePopover from '@/app/shared/delete-popover';
+import { productListType } from 'types/product/product';
 
 // get status badge
 function getStatusBadge(status: string) {
@@ -89,9 +90,10 @@ function getStockStatus(status: number) {
 }
 
 // get rating calculation
-function getRating(rating: number[]) {
-  let totalRating = rating.reduce((partialSum, value) => partialSum + value, 0);
-  let review = totalRating / rating?.length;
+function getRating(rating: number) {
+  // let totalRating = rating.reduce((partialSum, value) => partialSum + value, 0);
+  // let review = totalRating / rating?.length;
+  let review = rating % 5;
 
   return (
     <div className="flex items-center">
@@ -103,7 +105,7 @@ function getRating(rating: number[]) {
           <PiStarFill className="w-4 fill-gray-300 text-gray-300" key={index} />
         );
       })}{' '}
-      <span className="ms-1 shrink-0">({totalRating})</span>
+      <span className="ms-1 shrink-0">({rating})</span>
     </div>
   );
 }
@@ -157,13 +159,13 @@ export const getColumns = ({
     key: 'product',
     width: 300,
     hidden: 'customer',
-    render: (_: string, row: ProductType) => (
+    render: (_: string, row: productListType) => (
       <AvatarCard
-        src={row.image}
-        name={row.name}
-        description={row.category}
+        src={row.mainImageUrl}
+        name={row.productName}
+        description={row.productDetailCode}
         avatarProps={{
-          name: row.name,
+          name: row.productName,
           size: 'lg',
           className: 'rounded-lg',
         }}
@@ -171,11 +173,11 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="상품 ID" />,
-    dataIndex: 'sku',
-    key: 'sku',
+    title: <HeaderCell title="상품 식별 코드" />,
+    dataIndex: 'productDetailCode',
+    key: 'productDetailCode',
     width: 150,
-    render: (sku: string) => <Text className="text-sm">SKU-{sku}</Text>,
+    render: (productDetailCode: string) => <Text className="text-sm">{productDetailCode}</Text>,
   },
   {
     title: (
@@ -183,13 +185,13 @@ export const getColumns = ({
         title="재고"
         sortable
         ascending={
-          sortConfig?.direction === 'asc' && sortConfig?.key === 'stock'
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'salesCount'
         }
       />
     ),
-    onHeaderCell: () => onHeaderCellClick('stock'),
-    dataIndex: 'stock',
-    key: 'stock',
+    onHeaderCell: () => onHeaderCellClick('salesCount'),
+    dataIndex: 'salesCount',
+    key: 'salesCount',
     width: 200,
     render: (stock: number) => getStockStatus(stock),
   },
@@ -207,21 +209,28 @@ export const getColumns = ({
     dataIndex: 'price',
     key: 'price',
     width: 150,
-    render: (value: string) => (
-      <Text className="font-medium text-gray-700">${value}</Text>
+    render: (value: number) => (
+      <Text className="font-medium text-gray-700">{value.toLocaleString("ko-kr")}원</Text>
     ),
   },
   {
     title: <HeaderCell title="별점" />,
-    dataIndex: 'rating',
-    key: 'rating',
+    dataIndex: 'totalFavoriteCount',
+    key: 'totalFavoriteCount',
     width: 200,
-    render: (rating: number[]) => getRating(rating),
+    render: (rating: number) => getRating(rating),
   },
   {
-    title: <HeaderCell title="상태" />,
-    dataIndex: 'status',
-    key: 'status',
+    title: <HeaderCell title="진열상태" />,
+    dataIndex: 'displayStatus',
+    key: 'displayStatus',
+    width: 120,
+    render: (value: string) => getStatusBadge(value),
+  },
+  {
+    title: <HeaderCell title="판매상태" />,
+    dataIndex: 'salesStatus',
+    key: 'salesStatus',
     width: 120,
     render: (value: string) => getStatusBadge(value),
   },

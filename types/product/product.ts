@@ -1,14 +1,15 @@
 export interface productListType {
-    productId: number;
+    mainImageUrl: string;
     productName: string;
-    productPrice: number;
-    productImage: string;
-    productCategory: string;
-    productStock: number;
-    productMinStock: number;
-    productRating: number;
-    productStatus: string;
-    productReviewCount: number;
+    productId: number;
+    productCode: string;
+    productDetailId: number;
+    productDetailCode: string;
+    salesCount: number;
+    price: number;
+    totalFavoriteCount: number
+    displayStatus: string;
+    salesStatus: string;
 }
 
 export interface productCreateType {

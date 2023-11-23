@@ -28,8 +28,8 @@ import FormFooter from '@/components/form-footer';
 import { ProductRegistrationType } from 'types/responseData';
 import { useSession } from 'next-auth/react';
 import { data } from '@/app/shared/logistics/shipment/details/tracking-history';
-import { productCreateImageType } from 'types/product/product';
-
+import { productCreateImageType } from'types/product/product';
+ 
 const MAP_STEP_TO_COMPONENT = {
   [formParts.summary]: ProductSummary,
   [formParts.media]: ProductMedia,
@@ -66,44 +66,59 @@ export default function CreateProduct({ id, product, className }: IndexProps) {
   const session = useSession();
   const onSubmit: SubmitHandler<CreateProductGentleInput> = () => {
 
-
-    console.log("inputdata", product);
+    const data = methods.getValues();
+    console.log("inputdata", data);
     console.log(session?.data?.user.accessToken);
     const pyaload = {
-      productImage: productImage,
-      detailImage: detailImage,
-
+      vendorEmail: session?.data?.user.vendorEmail,
+      productName: data?.productName,
+      productPrice: data?.productPrice,
+      brandName: session?.data?.user.brandName,
+      brandLogoUrl: session?.data?.user.brandLogoImageUrl,
+      categoryName: [data?.parentCategoryName, data?.childCategoryName],
+      sizeName: data?.sizeName,
+      colorName: data?.colorName,
+      explainImageUrl: detailImage,
+      thumbnailsImageUrl: productImage,
+      mainImageUrl: productImage[0],
     }
 
     console.log('pyaload', pyaload);
-    // fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization' : `Bearer ${session?.data?.user.accessToken}`
-    //   },
-    //   body: JSON.stringify(product),
-    // })
-    // .then(response =>   {
-    //   const contentType = response.headers.get('content-type');
-      
-    //   if (contentType && contentType.includes('application/json')) {
-    //     return response.json();
-    //   } else {
-    //     throw new TypeError('Oops, we haven\'t got JSON!');
-    //   }
-    // })
-    // .then(json => { /* process your JSON further */ })
-    // .catch(error => console.error(error));
-    // setLoading(true);
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   console.log('product_data', data);
-    //   toast.success(
-    //     <Text as="b">Product successfully {id ? 'updated' : 'created'}</Text>
-    //   );
-    //   methods.reset();
-    // }, 600);
+    try {
+      if( !session?.data?.user.accessToken ) throw new Error('accessToken is null');
+      fetch(`${process.env.BASE_API_URL}api/v1/product/product-create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${session?.data?.user.accessToken}`
+        },
+        body: JSON.stringify(pyaload),
+      })
+      .then(response =>   {
+        const contentType = response.headers.get('content-type');
+        
+        if (contentType && contentType.includes('application/json')) {
+          return response.json();
+        } else {
+          throw new TypeError('Oops, we haven\'t got JSON!');
+        }
+      })
+      .then(json => { /* process your JSON further */ })
+      .catch(error => console.error(error));
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        console.log('product_data', data);
+        toast.success(
+          <Text as="b">Product successfully {id ? 'updated' : 'created'}</Text>
+        );
+        methods.reset();
+      }, 600);
+    } catch (error) {
+      console.log(error);
+    }
+    
+    
   };
 
   return (

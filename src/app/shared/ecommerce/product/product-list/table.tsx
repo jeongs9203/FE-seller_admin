@@ -7,6 +7,7 @@ import { useColumn } from '@/hooks/use-column';
 import { Button } from '@/components/ui/button';
 import ControlledTable from '@/components/controlled-table';
 import { getColumns } from '@/app/shared/ecommerce/product/product-list/columns';
+import { productListType } from 'types/product/product';
 const FilterElement = dynamic(
   () => import('@/app/shared/ecommerce/product/product-list/filter-element'),
   { ssr: false }
@@ -21,7 +22,7 @@ const filterState = {
   status: '',
 };
 
-export default function ProductsTable({ data = [] }: { data: any[] }) {
+export default function ProductsTable({ data = [] }: { data: productListType[] }) {
   const [pageSize, setPageSize] = useState(10);
 
   const onHeaderCellClick = (value: string) => ({
