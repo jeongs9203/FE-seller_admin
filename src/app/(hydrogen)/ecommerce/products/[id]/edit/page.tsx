@@ -93,7 +93,7 @@ export default function EditProductPage({
         </Link>
       </PageHeader>
 
-      <CreateProduct id={params.id} product={productData} />
+      {/* <CreateProduct id={params.id} product={productData} /> */}
     </>
   );
 }
