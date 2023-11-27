@@ -27,6 +27,7 @@
     "@react-email/text": "0.0.5",
     "@t3-oss/env-nextjs": "^0.6.1",
     "@tailwindcss/container-queries": "^0.1.1",
+    "@types/react-query": "^1.2.9",
     "@uploadthing/react": "^5.6.2",
     "aws-crt": "^1.18.1",
     "aws-sdk": "^2.1480.0",

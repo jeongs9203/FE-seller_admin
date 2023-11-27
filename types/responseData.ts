@@ -137,3 +137,32 @@ export interface commonResType {
     code: number;
     result: any;
 }
+
+export interface SellerSettlementDailyType {
+    dailySettlementAmount: number;
+    dailyCommissionAmount: number;
+    expectedDailySettlementAmount: number;
+    settlementStatus: string;
+    dailyProductSettlementDtoList: string;
+    productName: string;
+    productCode: string;
+    productDailyTotalAmount: number;
+    dailyCardAmount: number;
+    dailyPayAmount: number;
+    count: number;
+    mainImageUrl: string;
+}
+
+export interface SellerSettlementMonthlyType {
+    monthlySettlementAmount: number;
+    monthlyCommissionAmount: number;
+    expectedMonthlySettlemenAmount: number;
+    settlementStatus: string;
+    monthlyProductSettlementDtoList: string;
+    productName: string;
+    productCode: string;
+    productMonthlyTotalAmount: number;
+    monthlyCardAmount: number;
+    monthlyPayAmount: number;
+    count: number;
+}

@@ -71,4 +71,3 @@ export interface SellerMainType {
     settlementAmount: number;
     expectedSettlementAmount: number;
 }
-
