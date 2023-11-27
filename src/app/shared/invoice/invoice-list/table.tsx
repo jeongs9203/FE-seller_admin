@@ -6,7 +6,8 @@ import { useTable } from '@/hooks/use-table';
 import { useColumn } from '@/hooks/use-column';
 import { Button } from '@/components/ui/button';
 import ControlledTable from '@/components/controlled-table';
-import { getColumns } from '@/app/shared/invoice/invoice-list/columns';
+import { getSettleColumns } from '@/app/shared/invoice/invoice-list/columns';
+import { SellerSettlementDailyType } from 'types/responseData';
 const FilterElement = dynamic(
   () => import('@/app/shared/invoice/invoice-list/filter-element'),
   { ssr: false }
@@ -16,14 +17,18 @@ const TableFooter = dynamic(() => import('@/app/shared/table-footer'), {
 });
 
 const filterState = {
-  amount: ['', ''],
-  createdAt: [null, null],
-  dueDate: [null, null],
-  status: '',
+  productDailyTotalAmount: ['', ''],
+  dailyCardAmount: ['', ''],
+  dailyPayAmount: ['', ''],
+  // count: ['', ''],
 };
 
-export default function InvoiceTable({ data = [] }: { data: any[] }) {
+export default function InvoiceTable({ resData }: { resData: SellerSettlementDailyType }) {
+
+  console.log(resData)
   const [pageSize, setPageSize] = useState(10);
+
+  const data = resData.dailyProductSettlementDtoList;
 
   const onHeaderCellClick = (value: string) => ({
     onClick: () => {
@@ -59,7 +64,7 @@ export default function InvoiceTable({ data = [] }: { data: any[] }) {
 
   const columns = React.useMemo(
     () =>
-      getColumns({
+    getSettleColumns({
         data,
         sortConfig,
         checkedItems: selectedRowKeys,

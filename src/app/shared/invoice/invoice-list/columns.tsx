@@ -14,6 +14,7 @@ import PencilIcon from '@/components/icons/pencil';
 import AvatarCard from '@/components/ui/avatar-card';
 import DateCell from '@/components/ui/date-cell';
 import DeletePopover from '@/app/shared/delete-popover';
+import { SellerSettlementProductType } from 'types/responseData';
 
 function getStatusBadge(status: string) {
   switch (status.toLowerCase()) {
@@ -58,7 +59,7 @@ type Columns = {
   onChecked?: (id: string) => void;
 };
 
-export const getColumns = ({
+export const getSettleColumns = ({
   data,
   sortConfig,
   checkedItems,
@@ -92,43 +93,43 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="상품" />,
-    dataIndex: 'customer',
-    key: 'customer',
-    width: 250,
-    hidden: 'customer',
+    title: <HeaderCell title="정산" />,
+    dataIndex: 'Settle',
+    key: 'Settle',
+    width: 400,
+    hidden: 'Settle',
 
-    render: (_: string, row: Invoice) => (
+    render: (_: string, row: SellerSettlementProductType) => (
       <AvatarCard
-        src={row.avatar}
-        name={row.name}
-        description={`INV-${row.id}`}
+        src={row.mainImageUrl}
+        name={row.productName}
+        description={`Settlement-${row.productName}`}
       />
     ),
   },
   {
     title: <HeaderCell title="상품코드" />,
-    dataIndex: 'email',
-    key: 'email',
-    width: 250,
-    render: (email: string) => email.toLowerCase(),
-  },
-  {
-    title: (
-      <HeaderCell
-        title="정산일"
-        sortable
-        ascending={
-          sortConfig?.direction === 'asc' && sortConfig?.key === 'createdAt'
-        }
-      />
-    ),
-    onHeaderCell: () => onHeaderCellClick('createdAt'),
-    dataIndex: 'createdAt',
-    key: 'createdAt',
+    dataIndex: 'productCode',
+    key: 'productCode',
     width: 200,
-    render: (value: Date) => <DateCell date={value} />,
+    render: (productCode: string) => productCode.toLowerCase(),
   },
+  // {
+  //   title: (
+  //     <HeaderCell
+  //       title="정산일"
+  //       sortable
+  //       ascending={
+  //         sortConfig?.direction === 'asc' && sortConfig?.key === 'createdAt'
+  //       }
+  //     />
+  //   ),
+  //   onHeaderCell: () => onHeaderCellClick('createdAt'),
+  //   dataIndex: 'createdAt',
+  //   key: 'createdAt',
+  //   width: 200,
+  //   render: (value: Date) => <DateCell date={value} />,
+  // },
   // {
   //   title: (
   //     <HeaderCell
@@ -148,16 +149,16 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title="총 금액"
+        title="총 매출"
         sortable
         ascending={
-          sortConfig?.direction === 'asc' && sortConfig?.key === 'amount'
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'productDailyTotalAmount'
         }
       />
     ),
-    onHeaderCell: () => onHeaderCellClick('amount'),
-    dataIndex: 'amount',
-    key: 'amount',
+    onHeaderCell: () => onHeaderCellClick('productDailyTotalAmount'),
+    dataIndex: 'productDailyTotalAmount',
+    key: 'productDailyTotalAmount',
     width: 200,
     render: (value: string) => (
       <Text className="font-medium text-gray-700 dark:text-gray-600">
@@ -166,19 +167,79 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="Card" />,
-    dataIndex: 'status',
-    key: 'status',
-    width: 120,
-    render: (value: string) => getStatusBadge(value),
+    title: (
+      <HeaderCell
+        title="일일 카드 매출"
+        sortable
+        ascending={
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'dailyCardAmount'
+        }
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('dailyCardAmount'),
+    dataIndex: 'dailyCardAmount',
+    key: 'dailyCardAmount',
+    width: 200,
+    render: (value: string) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        ￦{value}
+      </Text>
+    ),
   },
   {
-    title: <HeaderCell title="Pay" />,
-    dataIndex: 'status',
-    key: 'status',
-    width: 120,
-    render: (value: string) => getStatusBadge(value),
+    title: (
+      <HeaderCell
+        title="일일 기타 매출"
+        sortable
+        ascending={
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'dailyPayAmount'
+        }
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('dailyPayAmount'),
+    dataIndex: 'dailyPayAmount',
+    key: 'dailyPayAmount',
+    width: 200,
+    render: (value: string) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        ￦{value}
+      </Text>
+    ),
   },
+  {
+    title: (
+      <HeaderCell
+        title="개수"
+        sortable
+        ascending={
+          sortConfig?.direction === 'asc' && sortConfig?.key === 'count'
+        }
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('count'),
+    dataIndex: 'count',
+    key: 'count',
+    width: 150,
+    render: (value: string) => (
+      <Text className="font-medium text-gray-700 dark:text-gray-600">
+        {value}개
+      </Text>
+    ),
+  },
+  // {
+  //   title: <HeaderCell title="Card" />,
+  //   dataIndex: 'status',
+  //   key: 'status',
+  //   width: 120,
+  //   render: (value: string) => getStatusBadge(value),
+  // },
+  // {
+  //   title: <HeaderCell title="Pay" />,
+  //   dataIndex: 'status',
+  //   key: 'status',
+  //   width: 120,
+  //   render: (value: string) => getStatusBadge(value),
+  // },
   {
     title: <></>,
     dataIndex: 'action',

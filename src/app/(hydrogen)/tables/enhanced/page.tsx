@@ -3,7 +3,7 @@
 import { routes } from '@/config/routes';
 import { invoiceData } from '@/data/invoice-data';
 import { exportToCSV } from '@/utils/export-to-csv';
-import InvoiceTable from '@/app/shared/invoice/invoice-list/table';
+// import InvoiceTable from '@/app/shared/invoice/invoice-list/table';
 import TableLayout from '../table-layout';
 
 const pageHeader = {
@@ -36,7 +36,7 @@ export default function EnhancedTablePage() {
       breadcrumb={pageHeader.breadcrumb}
       onExport={() => handleExportData()}
     >
-      <InvoiceTable data={invoiceData} />
+      {/* <InvoiceTable data={invoiceData} /> */}
     </TableLayout>
   );
 }

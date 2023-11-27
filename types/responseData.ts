@@ -143,14 +143,8 @@ export interface SellerSettlementDailyType {
     dailyCommissionAmount: number;
     expectedDailySettlementAmount: number;
     settlementStatus: string;
-    dailyProductSettlementDtoList: string;
-    productName: string;
-    productCode: string;
-    productDailyTotalAmount: number;
-    dailyCardAmount: number;
-    dailyPayAmount: number;
-    count: number;
-    mainImageUrl: string;
+    dailyProductSettlementDtoList: SellerSettlementProductType[];
+    
 }
 
 export interface SellerSettlementMonthlyType {
@@ -158,11 +152,15 @@ export interface SellerSettlementMonthlyType {
     monthlyCommissionAmount: number;
     expectedMonthlySettlemenAmount: number;
     settlementStatus: string;
-    monthlyProductSettlementDtoList: string;
+    monthlyProductSettlementDtoList: SellerSettlementProductType[];
+}
+
+export interface SellerSettlementProductType {
     productName: string;
     productCode: string;
-    productMonthlyTotalAmount: number;
-    monthlyCardAmount: number;
-    monthlyPayAmount: number;
+    productDailyTotalAmount: number;
+    dailyCardAmount: number;
+    dailyPayAmount: number;
     count: number;
+    mainImageUrl: string;
 }

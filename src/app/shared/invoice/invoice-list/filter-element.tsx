@@ -71,10 +71,18 @@ export default function FilterElement({
   return (
     <>
       <PriceField
-        value={filters['amount']}
-        onChange={(data) => updateFilter('amount', data)}
+        value={filters['productDailyTotalAmount']}
+        onChange={(data) => updateFilter('productDailyTotalAmount', data)}
       />
-      <DateFiled
+      <PriceField
+        value={filters['dailyCardAmount']}
+        onChange={(data) => updateFilter('dailyCardAmount', data)}
+      />
+      <PriceField
+        value={filters['dailyPayAmount']}
+        onChange={(data) => updateFilter('dailyPayAmount', data)}
+      />
+      {/* <DateFiled
         selected={getDateRangeStateValues(filters['createdAt'][0])}
         startDate={getDateRangeStateValues(filters['createdAt'][0])}
         endDate={getDateRangeStateValues(filters['createdAt'][1])}
@@ -119,7 +127,7 @@ export default function FilterElement({
           label: 'Status',
           labelClassName: 'font-medium text-gray-700',
         })}
-      />
+      /> */}
       {isFiltered ? (
         <Button
           size="sm"
