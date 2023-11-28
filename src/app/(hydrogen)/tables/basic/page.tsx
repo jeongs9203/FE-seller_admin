@@ -4,7 +4,7 @@ import { routes } from '@/config/routes';
 import { orderData } from '@/data/order-data';
 import { invoiceData } from '@/data/invoice-data';
 import { productsData } from '@/data/products-data';
-import { getColumns } from '@/app/shared/invoice/invoice-list/columns';
+// import { getColumns } from '@/app/shared/invoice/invoice-list/columns';
 import { getColumns as getOrderColumns } from '@/app/shared/ecommerce/order/order-list/columns';
 import { getColumns as getProductColumns } from '@/app/shared/ecommerce/product/product-list/columns';
 import BasicTableWidget from '@/components/controlled-table/basic-table-widget';
