@@ -66,14 +66,14 @@ export const menuItems = [
         name: '카테고리',
         href: routes.eCommerce.categories,
       },
-      {
-        name: '카테고리 추가',
-        href: routes.eCommerce.createCategory,
-      },
-      {
-        name: '카테고리 수정',
-        href: routes.eCommerce.editCategory(DUMMY_ID),
-      },
+      // {
+      //   name: '카테고리 추가',
+      //   href: routes.eCommerce.createCategory,
+      // },
+      // {
+      //   name: '카테고리 수정',
+      //   href: routes.eCommerce.editCategory(DUMMY_ID),
+      // },
       {
         name: '주문목록',
         href: routes.eCommerce.orders,
@@ -94,10 +94,10 @@ export const menuItems = [
         name: '후기',
         href: routes.eCommerce.reviews,
       },
-      {
-        name: '후기관리',
-        href: routes.eCommerce.shop,
-      },
+      // {
+      //   name: '후기관리',
+      //   href: routes.eCommerce.shop,
+      // },
       // {
       //   name: '삭제예정',
       //   href: routes.eCommerce.cart,
@@ -108,29 +108,29 @@ export const menuItems = [
       // },
     ],
   },
-  {
-    name: 'CS',
-    href: '#',
-    icon: <PiHeadsetDuotone />,
-    dropdownItems: [
-      {
-        name: '1:1상담',
-        href: routes.support.inbox,
-      },
-      {
-        name: 'FAQ',
-        href: routes.support.snippets,
-      },
-      {
-        name: '판매자관리',
-        href: routes.support.templates,
-      },
-      {
-        name: '유저관리',
-        href: routes.support.usermanagement,
-      },
-    ],
-  },
+  // {
+  //   name: 'CS',
+  //   href: '#',
+  //   icon: <PiHeadsetDuotone />,
+  //   dropdownItems: [
+  //     {
+  //       name: '1:1상담',
+  //       href: routes.support.inbox,
+  //     },
+  //     {
+  //       name: 'FAQ',
+  //       href: routes.support.snippets,
+  //     },
+  //     {
+  //       name: '판매자관리',
+  //       href: routes.support.templates,
+  //     },
+  //     {
+  //       name: '유저관리',
+  //       href: routes.support.usermanagement,
+  //     },
+  //   ],
+  // },
   {
     name: '정산',
     href: '#',
