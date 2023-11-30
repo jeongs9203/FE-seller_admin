@@ -3,7 +3,7 @@ import CategoryTable from '@/app/shared/ecommerce/category/category-list/table';
 import CategoryPageHeader from './category-page-header';
 
 const pageHeader = {
-  title: 'Categories',
+  title: '카테고리',
   breadcrumb: [
     {
       href: routes.eCommerce.dashboard,

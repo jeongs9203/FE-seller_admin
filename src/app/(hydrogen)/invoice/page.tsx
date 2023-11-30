@@ -32,7 +32,7 @@ async function getInvoiceData() {
 
   const session = await getServerSession(authOptions)
   let toDay = new Date()
-  toDay.setDate(toDay.getDate() - 1)
+  toDay.setDate(toDay.getDate() - 3)
   const myDate = toDay.toISOString().slice(0,10)
   console.log(session?.user.accessToken)
   console.log(session?.user.vendorEmail)

@@ -40,7 +40,7 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="Image" />,
+    title: <HeaderCell title="사진" />,
     dataIndex: 'image',
     key: 'image',
     width: 100,
@@ -59,7 +59,7 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title="Category Name"
+        title="카테고리명"
         sortable
         ascending={
           sortConfig?.direction === 'asc' && sortConfig?.key === 'name'
@@ -77,7 +77,7 @@ export const getColumns = ({
     ),
   },
   {
-    title: <HeaderCell title="Description" />,
+    title: <HeaderCell title="설명" />,
     dataIndex: 'description',
     key: 'description',
     width: 250,
@@ -88,7 +88,7 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title="Slug"
+        title="참조"
         sortable
         ascending={
           sortConfig?.direction === 'asc' && sortConfig?.key === 'slug'
@@ -104,7 +104,7 @@ export const getColumns = ({
   {
     title: (
       <HeaderCell
-        title="Products"
+        title="상품"
         align="center"
         sortable
         ascending={
